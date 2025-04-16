@@ -1,4 +1,4 @@
-# Musiqa tingliash imkoniyatini beruvchi loyha!
+# Musiqa tingliash imkoniyatini beruvchi loyiha!
 
 ## Funksional talablar:
 - User Register qilishi.
