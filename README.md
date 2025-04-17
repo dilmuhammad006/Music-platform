@@ -1,4 +1,4 @@
-# Musiqa tingliash imkoniyatini beruvchi loyha!
+# Musiqa tingliash imkoniyatini beruvchi loyiha!
 
 ## Funksional talablar:
 - User Register qilishi.
@@ -12,7 +12,7 @@
 
 ## No funksional talablar:
 - Musiqalar doim kengaytirib borilishi.
-- Refresh token orqali acces token vaqtini uzaytirish va tizimda barqaror ushlash
+- Refresh token orqali acces token vaqtini uzaytirish va tizimda barqaror ushlash.
 - Tezlik.
 - Havfsizlik.
 
