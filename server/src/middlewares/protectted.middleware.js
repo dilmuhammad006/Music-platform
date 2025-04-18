@@ -8,7 +8,6 @@ const {
   REFRESH_TOKEN_SECRET_KEY,
 } = dotenvConfig;
 
-
 export const Protected = (isProtected) => {
   return (req, res, next) => {
     if (!isProtected) {
@@ -19,9 +18,8 @@ export const Protected = (isProtected) => {
     const accessToken = req.cookies.ACCES_TOKEN;
     const refreshToken = req.cookies.REFRESH_TOKEN;
 
-
     if (!accessToken && !refreshToken) {
-      return res.status(409).send({ message: "Token not found" });
+      return res.status(401).send({ message: "Token not found" });
     }
 
     if (!accessToken) {
@@ -29,7 +27,7 @@ export const Protected = (isProtected) => {
         const data = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET_KEY);
 
         if (!data || !data.role || !data.id) {
-          return res.status(409).send({ message: "Incorrect Token" });
+          return res.status(401).send({ message: "Incorrect Token" });
         }
 
         const newAccessToken = jwt.sign(
@@ -85,7 +83,7 @@ export const Protected = (isProtected) => {
 
       next();
     } catch (err) {
-      return res.status(401).send({ message: "Your token is not iterable" });
+      return res.status(401).send({ message: "Your token is not permitted" });
     }
   };
 };

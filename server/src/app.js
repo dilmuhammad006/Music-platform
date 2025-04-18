@@ -1,7 +1,7 @@
 import router from "./modules/main.route.js";
 import express from "express";
 import morgan from "morgan";
-import cookiParser from "cookie-parser";
+import cookieParser from "cookie-parser";
 import errorHandler from "./middlewares/error.handler.middleware.js";
 const app = express();
 
@@ -10,7 +10,7 @@ const app = express();
 //   console.log(process.env.NODE_ENV);
 //
 
-app.use(cookiParser());
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));

@@ -32,6 +32,20 @@ class LikedController {
       next(error);
     }
   };
+
+  getAllLiked = async (req, res, next) => {
+    try {
+      console.log(req.user)
+      const { id } = req.user;
+  
+      const data = await this.#_likedService.getAllLiked(id);
+  
+      res.status(data.status).send(data);
+    } catch (error) {
+      next(error);
+    }
+  };
+  
 }
 
 export default new LikedController();

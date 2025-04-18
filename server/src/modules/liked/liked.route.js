@@ -5,6 +5,7 @@ const likedRouter = Router();
 
 likedRouter
   .post("/like", Protected(true), likedController.like)
-  .delete("/unlike", Protected(true), likedController.unlike);
+  .delete("/unlike", Protected(true), likedController.unlike)
+  .get("/all", Protected(true), likedController.getAllLiked);
 
 export default likedRouter;

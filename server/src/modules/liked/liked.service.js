@@ -1,10 +1,14 @@
+import mongoose from "mongoose";
 import { BaseException } from "../../middlewares/base.exception.js";
+import musicsModel from "../musics/musics.model.js";
 import likedModel from "./liked.model.js";
 
 class LikedService {
+  #_musicsModel;
   #_likedModel;
   constructor() {
     this.#_likedModel = likedModel;
+    this.#_musicsModel = musicsModel;
   }
 
   like = async (userId, musicianId, musicId) => {
@@ -46,6 +50,28 @@ class LikedService {
     return {
       status: 200,
       message: "Successfully unliked",
+    };
+  };
+
+  getAllLiked = async (userId) => {
+    const liked = await this.#_likedModel.find({ userId });
+
+    const likedId = liked.map((lk) => new mongoose.Types.ObjectId(lk.musicId));
+
+    const likedMusics = await this.#_musicsModel
+      .find({
+        _id: { $in: likedId },
+      })
+      .sort({ createdAt: -1 });
+
+    if (!likedMusics.length) {
+      throw new BaseException("You don't have any liked musics", 404);
+    }
+
+    return {
+      status: 200,
+      message: "success",
+      musics: likedMusics,
     };
   };
 }
