@@ -39,8 +39,8 @@
     - id
     - name
     - musicianId (FK)
-    - createdAt
     - duration
+    - createdAt
 
 4. LikedMusic:
     - id

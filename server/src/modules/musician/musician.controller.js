@@ -1,4 +1,3 @@
-import errorHandler from "../../middlewares/error.handler.middleware.js";
 import musicianService from "./musician.service.js";
 
 class MusicianController {

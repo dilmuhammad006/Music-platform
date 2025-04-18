@@ -13,6 +13,12 @@ const musicianSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    musics: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Musics",
+      }
+    ],
     musicsCount: {
       type: Number,
       default: 0,
@@ -24,7 +30,7 @@ const musicianSchema = new mongoose.Schema(
     },
   },
   {
-    collection: "Musician", 
+    collection: "Musician",
     timestamps: true,
     versionKey: false,
   }

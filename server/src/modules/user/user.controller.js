@@ -9,10 +9,16 @@ class UserController {
 
   getAllUsers = async (req, res, next) => {
     try {
-      const data = await this.#_userService.getAllUsers();
+      const { page, limit, srotBy, sortOrder } = req.params;
+      const data = await this.#_userService.getAllUsers(
+        page,
+        limit,
+        srotBy,
+        sortOrder
+      );
       res.status(200).send(data);
     } catch (error) {
-      next(error)
+      next(error);
     }
   };
 
@@ -30,7 +36,7 @@ class UserController {
 
       res.status(data.status).send(data);
     } catch (error) {
-      next(error)
+      next(error);
     }
   };
 
@@ -46,9 +52,11 @@ class UserController {
 
       tokenMiddleWare(data.data, res);
 
-      res.status(data.status).send(data);
+      const tokens = tokenMiddleWare(data.data, res);
+
+      res.status(data.status).send({ ...data, tokens });
     } catch (error) {
-      next(error)
+      next(error);
     }
   };
 
@@ -56,16 +64,15 @@ class UserController {
     try {
       res.clearCookie("ACCES_TOKEN");
       res.clearCookie("REFRESH_TOKEN");
-  
+
       return res.status(200).send({
         status: 200,
         message: "You are successfully logged out",
       });
     } catch (error) {
-      next(error)
+      next(error);
     }
   };
-  
 }
 
 export default new UserController();

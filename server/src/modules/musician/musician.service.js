@@ -8,7 +8,7 @@ class MusicianService {
   }
 
   getAllMusicians = async () => {
-    const musicians = await this.#_musicianModel.find();
+    const musicians = await this.#_musicianModel.find().populate("musics");
 
     return {
       status: 200,

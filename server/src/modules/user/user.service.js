@@ -8,13 +8,29 @@ class UserService {
     this.#_seedUsers();
   }
 
-  getAllUsers = async () => {
-    const users = await this.#_userModel.find();
+  getAllUsers = async (
+    page = 1,
+    limit = 10,
+    srotBy = "createdAt",
+    sortOrder = "desc"
+  ) => {
+    const skip = (page - 1) * limit;
+    const sortOption = {};
+    sortOption[srotBy] = sortOrder === "desc" ? -1 : 1;
+    const users = await this.#_userModel
+      .find()
+      .sort(sortOption)
+      .skip(skip)
+      .limit(limit);
 
     return {
       status: 200,
       message: "success",
       count: users.length,
+      page,
+      limit,
+      srotBy,
+      sortOrder,
       data: users,
     };
   };
@@ -99,7 +115,7 @@ class UserService {
     }
 
     return {
-      status: 201,
+      status: 200,
       message: "You are succesfullly logged in",
       data: foundedUser,
     };

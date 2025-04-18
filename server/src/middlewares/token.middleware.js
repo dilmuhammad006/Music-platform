@@ -37,6 +37,10 @@ const tokenMiddleWare = (user, res) => {
     maxAge: 24 * 60 * 60 * 1000,
   });
 
+  return {
+    accessToken: ACCES_TOKEN,
+    refreshToken: REFRESH_TOKEN,
+  };
 };
 
 export default tokenMiddleWare;
