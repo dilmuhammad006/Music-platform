@@ -1,3 +1,4 @@
+import { BaseException } from "../../middlewares/base.exception.js";
 import likedModel from "./liked.model.js";
 
 class LikedService {
@@ -14,10 +15,7 @@ class LikedService {
     });
 
     if (isExistsLike) {
-      return {
-        status: 409,
-        message: "You've already liked this music",
-      };
+      throw new BaseException("You're already liked to this music", 409);
     }
 
     await this.#_likedModel.create({ userId, musicId, musicianId });
@@ -30,10 +28,7 @@ class LikedService {
 
   unLike = async (userId, musicianId, musicId) => {
     if (!userId || !musicId || !musicianId) {
-      return {
-        status: 400,
-        message: "Required fields are missing",
-      };
+      throw new BaseException("Request not completed", 400);
     }
 
     const foundedLiked = await this.#_likedModel.findOne({
@@ -43,10 +38,7 @@ class LikedService {
     });
 
     if (!foundedLiked) {
-      return {
-        status: 404,
-        message: "Like not found",
-      };
+      throw new BaseException("This music not found", 404);
     }
 
     await this.#_likedModel.findByIdAndDelete(foundedLiked._id);

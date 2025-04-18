@@ -15,7 +15,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
 
-app.use(errorHandler);
 
 app.use("/", router);
 
@@ -24,5 +23,7 @@ app.all("/*splat", (req, res) => {
     message: "This page not found",
   });
 });
+
+app.use(errorHandler);
 
 export default app;

@@ -1,6 +1,7 @@
 import { isValidObjectId } from "mongoose";
 import musicsModel from "./musics.model.js";
 import musicianModel from "../musician/musician.model.js";
+import { BaseException } from "../../middlewares/base.exception.js";
 
 class MusicsService {
   #_musicModel;
@@ -23,17 +24,11 @@ class MusicsService {
 
   addMusics = async (name, musicianId, duration) => {
     if (!name || !musicianId || !duration) {
-      return {
-        status: 400,
-        message: "Request not completed",
-      };
+      throw new BaseException("Request not completed", 409);
     }
 
     if (!isValidObjectId(musicianId)) {
-      return {
-        status: 409,
-        message: `${musicianId} not valid`,
-      };
+      throw new BaseException("Given id is not valid", 409);
     }
 
     const foundedMusician = await this.#_musicianModel.findOne({
@@ -41,19 +36,13 @@ class MusicsService {
     });
 
     if (!foundedMusician) {
-      return {
-        status: 404,
-        message: "Musician not found",
-      };
+      throw new BaseException("Musician not found", 404);
     }
 
     const foundedMusic = await this.#_musicModel.findOne({ name, musicianId });
 
     if (foundedMusic) {
-      return {
-        status: 409,
-        message: "This music already exists!",
-      };
+      throw new BaseException("This music already exists", 409);
     }
 
     const music = await this.#_musicModel.create({
@@ -74,19 +63,13 @@ class MusicsService {
   };
   deleteMusics = async (id) => {
     if (!isValidObjectId(id)) {
-      return {
-        status: 409,
-        message: `${id} is not suitable`,
-      };
+      throw new BaseException("Given id is not valid", 409);
     }
 
     const foundedMusic = await this.#_musicModel.findOne({ _id: id });
 
     if (!foundedMusic) {
-      return {
-        status: 404,
-        message: "This music not found",
-      };
+      throw new BaseException("This music not found", 404);
     }
 
     await this.#_musicModel.findByIdAndDelete({ _id: id });
@@ -98,19 +81,13 @@ class MusicsService {
 
   getMusicsById = async (id) => {
     if (!isValidObjectId(id)) {
-      return {
-        status: 409,
-        message: `${id} is not suitable`,
-      };
+      throw new BaseException("Given id is not valid", 409);
     }
 
     const foundedMusic = await this.#_musicModel.findOne({ _id: id });
 
     if (!foundedMusic) {
-      return {
-        status: 404,
-        message: "This music not found",
-      };
+      throw new BaseException("This music not found", 404);
     }
 
     return {
@@ -122,25 +99,16 @@ class MusicsService {
 
   updateMusics = async (id, newName) => {
     if (!isValidObjectId(id)) {
-      return {
-        status: 409,
-        message: `${id} is not suitable`,
-      };
+      throw new BaseException("Given id is not valid", 409);
     }
 
     if (!newName) {
-      return {
-        status: 400,
-        message: "Request not completed",
-      };
+      throw new BaseException("Request not completed", 409);
     }
     const foundedMusic = await this.#_musicModel.findOne({ _id: id });
 
     if (!foundedMusic) {
-      return {
-        status: 404,
-        message: "This music not found",
-      };
+      throw new BaseException("This music not found", 404);
     }
 
     const music = await this.#_musicModel.findByIdAndUpdate(

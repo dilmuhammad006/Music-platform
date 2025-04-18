@@ -25,10 +25,6 @@ class MusicsController {
         duration
       );
 
-      if (data.status >= 400) {
-        return res.status(data.status).send(data);
-      }
-
       res.status(data.status).send(data);
     } catch (error) {
       next(error);
@@ -38,13 +34,7 @@ class MusicsController {
   deleteMusics = async (req, res, next) => {
     try {
       const { id } = req.params;
-
       const data = await this.#_musicService.deleteMusics(id);
-
-      if (data.status >= 400) {
-        return res.status(data.status).send(data);
-      }
-
       res.status(data.status).send(data);
     } catch (error) {
       next(error);
@@ -56,11 +46,6 @@ class MusicsController {
       const { id } = req.params;
 
       const data = await this.#_musicService.getMusicsById(id);
-
-      if (data.status >= 400) {
-        return res.status(data.status).send(data);
-      }
-
       res.status(data.status).send(data);
     } catch (error) {
       next(error);
@@ -73,10 +58,6 @@ class MusicsController {
       const { name } = req.body;
 
       const data = await this.#_musicService.updateMusics(id, name);
-
-      if (data.status >= 400) {
-        return res.status(data.status).send(data);
-      }
 
       res.status(data.status).send(data);
     } catch (error) {

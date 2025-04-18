@@ -21,11 +21,6 @@ class MusicianController {
       const { name, nickname } = req.body;
 
       const data = await this.#_musicianService.addMusicians(name, nickname);
-
-      if (data.status >= 400) {
-        return res.status(data.status).send(data);
-      }
-
       res.status(data.status).send(data);
     } catch (error) {
       next(error);

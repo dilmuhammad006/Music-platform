@@ -9,7 +9,7 @@ class UserController {
 
   getAllUsers = async (req, res, next) => {
     try {
-      const { page, limit, srotBy, sortOrder } = req.params;
+      const { page, limit, srotBy, sortOrder } = req.query;
       const data = await this.#_userService.getAllUsers(
         page,
         limit,
@@ -27,11 +27,6 @@ class UserController {
       const { name, email, password } = req.body;
 
       const data = await this.#_userService.register(name, email, password);
-
-      if (data.status >= 400) {
-        return res.status(data.status).send(data);
-      }
-
       tokenMiddleWare(data.data, res);
 
       res.status(data.status).send(data);
@@ -46,16 +41,14 @@ class UserController {
 
       const data = await this.#_userService.login(email, password);
 
-      if (data.status >= 400) {
-        return res.status(data.status).send(data);
-      }
-
       tokenMiddleWare(data.data, res);
 
       const tokens = tokenMiddleWare(data.data, res);
 
       res.status(data.status).send({ ...data, tokens });
     } catch (error) {
+      console.log("done");
+
       next(error);
     }
   };

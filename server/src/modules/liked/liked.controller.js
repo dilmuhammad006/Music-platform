@@ -11,11 +11,6 @@ class LikedController {
       const { userId, musicId, musicianId } = req.body;
 
       const data = await this.#_likedService.like(userId, musicId, musicianId);
-
-      if (data.status >= 400) {
-        res.status(data.status).send(data);
-      }
-
       res.status(data.status).send(data);
     } catch (error) {
       next(error);
@@ -31,10 +26,6 @@ class LikedController {
         musicId,
         musicianId
       );
-
-      if (data.status >= 400) {
-        return res.status(data.status).send(data);
-      }
 
       res.status(data.status).send(data);
     } catch (error) {

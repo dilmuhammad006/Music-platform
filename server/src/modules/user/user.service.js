@@ -1,3 +1,4 @@
+import { BaseException } from "../../middlewares/base.exception.js";
 import userModel from "./user.model.js";
 import bcrypt from "bcrypt";
 
@@ -58,19 +59,13 @@ class UserService {
 
   register = async (name, email, password) => {
     if (!name || !email || !password) {
-      return {
-        status: 400,
-        message: "Request not completed",
-      };
+      throw new BaseException("Request not completed", 400);
     }
 
     const foundedUser = await this.#_userModel.findOne({ email });
 
     if (foundedUser) {
-      return {
-        status: 409,
-        message: "This user already exists!",
-      };
+      throw new BaseException("This  user already exists", 409);
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
@@ -90,28 +85,19 @@ class UserService {
 
   login = async (email, password) => {
     if (!email || !password) {
-      return {
-        status: 400,
-        message: "Request not completed",
-      };
+      throw new BaseException("Request not completed", 400);
     }
 
     const foundedUser = await this.#_userModel.findOne({ email });
 
     if (!foundedUser) {
-      return {
-        status: 404,
-        message: "User not found",
-      };
+      throw new BaseException("User not found", 404);
     }
 
     const isMatch = await bcrypt.compare(password, foundedUser.password);
 
     if (!isMatch) {
-      return {
-        status: 409,
-        message: "Email or password not suitable",
-      };
+      throw new BaseException("Email or password are not suitable ", 409);
     }
 
     return {

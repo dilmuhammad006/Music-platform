@@ -1,3 +1,4 @@
+import { BaseException } from "../../middlewares/base.exception.js";
 import musicianModel from "./musician.model.js";
 
 class MusicianService {
@@ -46,19 +47,15 @@ class MusicianService {
   };
   addMusicians = async (name, nickname) => {
     if (!name || !nickname) {
-      return {
-        status: 400,
-        message: "Request not completed",
-      };
+      throw new BaseException("Request not completed", 409);
     }
 
     const foundedMusician = await this.#_musicianModel.findOne({ nickname });
 
     if (foundedMusician) {
-      return {
-        status: 409,
-        message: "This musician already exists with this nickname",
-      };
+      throw new BaseException(
+        "This musician already exists with this nickname"
+      );
     }
 
     const musician = await this.#_musicianModel.create({ name, nickname });
