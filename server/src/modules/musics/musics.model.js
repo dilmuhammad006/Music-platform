@@ -16,6 +16,7 @@ const musicsSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    fileUrl: String,
   },
   {
     timestamps: true,

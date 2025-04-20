@@ -54,7 +54,7 @@ class MusicianService {
 
     if (foundedMusician) {
       throw new BaseException(
-        "This musician already exists with this nickname"
+        "This musician already exists with this nickname", 409
       );
     }
 

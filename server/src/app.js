@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import errorHandler from "./middlewares/error.handler.middleware.js";
 import cors from "cors";
+import path from "path";
 const app = express();
 
 // if (process.env.NODE_ENV.trim() === "development") {
@@ -19,7 +20,10 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/uploads", express.static("uploads"));
+
+const uploadsPath = path.join(process.cwd(), "..", '/uploads');
+app.use('/uploads', express.static(uploadsPath));
+console.log(uploadsPath)
 
 app.use("/", router);
 

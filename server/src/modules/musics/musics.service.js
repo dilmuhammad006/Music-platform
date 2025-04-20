@@ -22,9 +22,10 @@ class MusicsService {
     };
   };
 
-  addMusics = async (name, musicianId, duration) => {
-    if (!name || !musicianId || !duration) {
-      throw new BaseException("That fields are required", 409);
+  addMusics = async (name, musicianId, duration, filename) => {
+    console.log("keldi")
+    if (!name || !musicianId || !duration || !filename) {
+      throw new BaseException("All fields are required", 409);
     }
 
     if (!isValidObjectId(musicianId)) {
@@ -34,13 +35,11 @@ class MusicsService {
     const foundedMusician = await this.#_musicianModel.findOne({
       _id: musicianId,
     });
-
     if (!foundedMusician) {
       throw new BaseException("Musician not found", 404);
     }
 
     const foundedMusic = await this.#_musicModel.findOne({ name, musicianId });
-
     if (foundedMusic) {
       throw new BaseException("This music already exists", 409);
     }
@@ -49,7 +48,9 @@ class MusicsService {
       name,
       musicianId,
       duration,
+      fileUrl: `/uploads/music/${filename}`,
     });
+
     await this.#_musicianModel.findByIdAndUpdate(musicianId, {
       $push: { musics: music._id },
       $inc: { musicsCount: 1 },
@@ -61,6 +62,7 @@ class MusicsService {
       data: music,
     };
   };
+
   deleteMusics = async (id) => {
     if (!isValidObjectId(id)) {
       throw new BaseException("Given id is not valid", 409);

@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  background-color: #212529;
+  color: #f1f1f1;
+  overflow: hidden;
+}
+
+header {
+  width: 250px;
+  background-color: #343a40;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 25px;
+  border-right: 3px solid #495057;
+}
+
+header img {
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 15px;
+}
+
+header a {
+  color: #f1f1f1;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+.container {
+  flex: 1;
+  padding: 30px;
+  background-color: #343a40;
+  border-radius: 15px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+}
+
+h4 {
+  color: #ffffff;
+}
+
+.artist-card:hover {
+  transform: translateY(-10px);
+}
+
+.artist-card img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.artist-card h5 {
+  color: #f1f1f1;
+  margin-top: 10px;
+}
+
+.artist-card .text-secondary {
+  color: #9e9e9e;
+}
+
+.artist-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  overflow-y: auto;
+  max-height: 600px;
+  padding-right: 8px;
+}
+.artist-container::-webkit-scrollbar {
+  display: none;
+}
+
+.artist-card {
+  width: 220px;
+  background-color: #333333;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+#error-message {
+  color: #ff4d4d;
+  font-size: 16px;
+}
+
+.logout-btn,
+.add-music {
+  background-color: #212529;
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.logout-btn:hover,
+.add-music:hover {
+  background-color: #495057;
+}
+
+.music-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.music-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+#music-list {
+  overflow-y: auto;
+  max-height: calc(100vh - 150px);
+  padding-right: 8px;
+}
+#music-list::-webkit-scrollbar {
+  display: none;
+}
+.email{
+    font-size: 11px;
+}

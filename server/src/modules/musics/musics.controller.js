@@ -1,3 +1,4 @@
+import { BaseException } from "../../middlewares/base.exception.js";
 import musicsService from "./musics.service.js";
 
 class MusicsController {
@@ -18,11 +19,20 @@ class MusicsController {
 
   addMusics = async (req, res, next) => {
     try {
+      console.log("controller");
       const { name, musicianId, duration } = req.body;
+      const file = req.file;
+
+
+      if (!file) {
+        throw new BaseException("Music file is required", 400);
+      }
+
       const data = await this.#_musicService.addMusics(
         name,
         musicianId,
-        duration
+        duration,
+        file.filename
       );
 
       res.status(data.status).send(data);

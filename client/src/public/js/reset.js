@@ -12,7 +12,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ password , resetToken}),
+      body: JSON.stringify({ password, resetToken }),
     });
 
     const data = await res.json();

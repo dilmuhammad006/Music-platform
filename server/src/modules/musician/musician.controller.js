@@ -9,7 +9,8 @@ class MusicianController {
   getAllMusicians = async (req, res, next) => {
     try {
       const data = await this.#_musicianService.getAllMusicians();
-
+      data.role = req.user.role;
+      data.email = req.user.email;
       res.status(data.status).send(data);
     } catch (error) {
       next(error);

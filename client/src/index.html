@@ -2,19 +2,37 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main</title>
-    <!-- <link rel="stylesheet" href=""> -->
+
+    <link rel="stylesheet" href="./public/css/index.css">
 </head>
 
 <body>
+    <header>
+        <img src="./public/images/harmonix.png" alt="harmonix" class="img-fluid rounded mb-3">
+        <button class="logout-btn">
+            <a href="" class="text-white text-decoration-none d-block">Logout</a>
+        </button>
+        
+    </header>
 
-    <a href="./pages/register.html">Register</a>
-    <a href="./pages/login.html">Login</a>
+    <div class="container mt-4 artist-section">
+        <h4 class="text-light">Artists...</h4>
+        <div class="artist-container">
+            <p class="text-light" id="error-message" style="display: none;"></p>
+        </div>
+    </div>
+    
 
+    <div class="container mt-4">
+        <h4 class="text-light">Musics...</h4>
+        <div id="music-list" class="d-flex flex-column gap-3"></div>
+    </div>
     <script type="module" src="./main.js"></script>
-
+    <script type="module" src="./public/js/logout.js"></script>
+    <script type="module" src="./public/js/main.js"></script>
 </body>
 
 </html>
