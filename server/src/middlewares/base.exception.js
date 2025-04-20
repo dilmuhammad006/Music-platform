@@ -1,6 +1,7 @@
 export class BaseException extends Error {
   constructor(message, status) {
     super(message);
-    (this.isException = true), (this.statusCode = status);
+    this.isException = true;
+    this.statusCode = status;
   }
 }

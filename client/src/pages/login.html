@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="../public/css/auth.css">
+</head>
+<body>
+  <div class="form-container">
+    <div class="text-center">
+      <img src="../public/images/harmonix.png" alt="harmonix picture" />
+    </div>
+    <h2 class="text-center mb-4">Login</h2>
+    <p id="error-message" class="text-danger mt-2"></p>
+
+    <form>
+      <div class="mb-3">
+        <label for="email" class="form-label">Enter your email</label>
+        <input type="email" id="email" class="form-control" name="email" required />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Enter your password</label>
+        <input type="password" id="password" class="form-control" name="password" required />
+      </div>
+      <button type="submit" class="btn btn-register w-100">Login</button>
+      <a href="./register.html" text-center>Don't have any account ...</a>
+      <a href="./forgot.html" text-center>Forgot password ...</a>
+    </form>
+  </div>
+
+  <script type="module" src="../public/js/login.js"></script>
+  <script type="module" src="../main.js"></script>
+</body>
+</html>

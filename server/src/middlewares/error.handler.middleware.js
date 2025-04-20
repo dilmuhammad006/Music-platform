@@ -9,15 +9,18 @@ const errorHandler = (error, req, res, next) => {
     method: req.method,
   });
 
-  const status = error.statusCode || 500;
-  const message = error.message || "Internal Server Error";
-
-  console.log(error.message)
-
-  res.status(status).json({
-    status,
-    message,
-  });
+  if (error.isException) {
+    res.status(error.statusCode).json({
+      success: false,
+      message: error.message,
+    });
+  } else {
+    console.log(error.message)
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
 };
 
 export default errorHandler;

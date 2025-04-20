@@ -32,7 +32,7 @@ class LikedService {
 
   unLike = async (userId, musicianId, musicId) => {
     if (!userId || !musicId || !musicianId) {
-      throw new BaseException("Request not completed", 400);
+      throw new BaseException("That fields are required", 400);
     }
 
     const foundedLiked = await this.#_likedModel.findOne({

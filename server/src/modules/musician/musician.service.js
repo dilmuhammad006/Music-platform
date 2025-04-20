@@ -43,11 +43,11 @@ class MusicianService {
       }
     }
 
-    // console.log("Default Musicians yaratildi ✅");
+    console.log("Default Musicians yaratildi");
   };
   addMusicians = async (name, nickname) => {
     if (!name || !nickname) {
-      throw new BaseException("Request not completed", 409);
+      throw new BaseException("That fields are required", 409);
     }
 
     const foundedMusician = await this.#_musicianModel.findOne({ nickname });

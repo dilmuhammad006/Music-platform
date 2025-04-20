@@ -3,18 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "parcel src/index.html src/pages/*.html --port 3000",
+    "start": "parcel src/index.html src/pages/*.html --port 4000",
     "build": "parcel build src/index.html src/pages/*.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "parcel": "^2.14.4"
   },
   "dependencies": {
     "axios": "^1.8.4",
-    "bootstrap": "^5.3.5"
+    "bootstrap": "^5.3.5",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
   }
 }

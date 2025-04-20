@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema(
       type: mongoose.SchemaTypes.String,
       required: false,
     },
+    resetToken: {
+      type: mongoose.SchemaTypes.String,
+      required: false
+    }
   },
   {
     collection: "User",

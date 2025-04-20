@@ -28,7 +28,6 @@ class UserController {
 
       const data = await this.#_userService.register(name, email, password);
       tokenMiddleWare(data.data, res);
-
       res.status(data.status).send(data);
     } catch (error) {
       next(error);
@@ -64,6 +63,30 @@ class UserController {
       });
     } catch (error) {
       next(error);
+    }
+  };
+  forgot = async (req, res, next) => {
+    try {
+      const { email } = req.body;
+
+      const data = await this.#_userService.forgot(email);
+
+      res.status(data.status).send(data);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  reset = async (req, res, next) => {
+    try {
+      const { password } = req.body;
+      const { resetToken } = req.body;
+
+      const data = await this.#_userService.reset(password, resetToken);
+
+      res.status(data.status).send(data);
+    } catch (error) {
+      next(error)
     }
   };
 }

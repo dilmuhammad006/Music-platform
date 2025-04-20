@@ -24,7 +24,7 @@ class MusicsService {
 
   addMusics = async (name, musicianId, duration) => {
     if (!name || !musicianId || !duration) {
-      throw new BaseException("Request not completed", 409);
+      throw new BaseException("That fields are required", 409);
     }
 
     if (!isValidObjectId(musicianId)) {
@@ -103,7 +103,7 @@ class MusicsService {
     }
 
     if (!newName) {
-      throw new BaseException("Request not completed", 409);
+      throw new BaseException("That fields are required", 409);
     }
     const foundedMusic = await this.#_musicModel.findOne({ _id: id });
 

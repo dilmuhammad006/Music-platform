@@ -27,6 +27,8 @@ userRouter
     validationMiddleware(LoginSchema),
     userController.login
   )
-  .post("/logout", Protected(false), userController.logout);
+  .post("/logout", Protected(false), userController.logout)
+  .post("/forgot", Protected(false), userController.forgot)
+  .post("/reset", Protected(false), userController.reset);
 
 export default userRouter;
