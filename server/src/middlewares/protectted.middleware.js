@@ -22,14 +22,13 @@ export const Protected = (isProtected) => {
       return res.status(401).send({ message: "Token not found" });
     }
 
-    if (!accessToken) {
+    if (!accessToken && refreshToken) {
       try {
         const data = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET_KEY);
 
         if (!data || !data.role || !data.id) {
           return res.status(401).send({ message: "Incorrect Token" });
         }
-
         const newAccessToken = jwt.sign(
           {
             id: data.id,
@@ -38,7 +37,7 @@ export const Protected = (isProtected) => {
           },
           ACCES_TOKEN_SECRET_KEY,
           {
-            expiresIn: +ACCES_TOKEN_SECRET_EXP_IN,
+            expiresIn: ACCES_TOKEN_SECRET_EXP_IN,
             algorithm: "HS256",
           }
         );
@@ -51,22 +50,23 @@ export const Protected = (isProtected) => {
           },
           REFRESH_TOKEN_SECRET_KEY,
           {
-            expiresIn: +REFRESH_TOKEN_SECRET_EXP_IN,
+            expiresIn: REFRESH_TOKEN_SECRET_EXP_IN,
             algorithm: "HS256",
           }
         );
 
-        res.cookie("accessToken", newAccessToken, {
+        res.cookie("ACCES_TOKEN", newAccessToken, {
           httpOnly: true,
-          maxAge: +ACCES_TOKEN_SECRET_EXP_IN * 1000,
+          maxAge: 1000 * 60 * 15,
         });
 
-        res.cookie("refreshToken", newRefreshToken, {
+        res.cookie("REFRESH_TOKEN", newRefreshToken, {
           httpOnly: true,
-          maxAge: +REFRESH_TOKEN_SECRET_EXP_IN * 1000,
+          maxAge: 1000 * 60 * 60 * 24 * 7,
         });
 
-        return res.status(200).send({ message: "Token updated" });
+
+        return next();
       } catch (err) {
         return res.status(401).send({ message: "Your refreshToken is so old" });
       }
@@ -74,16 +74,13 @@ export const Protected = (isProtected) => {
 
     try {
       const decodedData = jwt.verify(accessToken, ACCES_TOKEN_SECRET_KEY);
-
-      req.role = decodedData.role;
-      req.user = {
-        id: decodedData.id,
-        email: decodedData.email,
-      };
-
-      next();
+      req.user = decodedData
+      return next();
     } catch (err) {
-      return res.status(401).send({ message: "Your token is not permitted" });
+      err.statusCode = 401;
+      err.message = "Your token is not permitted";
+      err.isException = true;
+      return next(err);
     }
   };
 };

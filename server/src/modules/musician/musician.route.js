@@ -14,9 +14,9 @@ musicianRouter
   )
   .post(
     "/add",
-    checkRole(["ADMIN"]),
     Protected(true),
     authMiddleware,
+    checkRole(["ADMIN"]),
     musicianController.addMusicians
   );
 

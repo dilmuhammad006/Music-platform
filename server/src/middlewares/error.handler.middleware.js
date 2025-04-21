@@ -15,12 +15,14 @@ const errorHandler = (error, req, res, next) => {
       message: error.message,
     });
   } else {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
       success: false,
       message: "Internal Server Error",
     });
   }
+
+  next()
 };
 
 export default errorHandler;

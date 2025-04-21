@@ -9,10 +9,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       credentials: "include",
     });
 
-    if (res.status == 401) {
+
+    const artists = await res.json();
+    if (res.status === 403 || res.status === 401) {
       return (window.location.href = "./pages/login.html");
     }
-    const artists = await res.json();
 
     document.querySelector("header").insertAdjacentHTML("afterbegin", `<p class = "email">${artists.email}</p>`)
     if (artists.role == "ADMIN") {
