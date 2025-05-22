@@ -6,7 +6,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   const params = new URLSearchParams(window.location.search);
   const resetToken = params.get("resetToken");
   try {
-    const res = await fetch("http://localhost:3000/users/reset", {
+    const res = await fetch("https://harmonix.uz/users/reset", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

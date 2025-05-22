@@ -3,7 +3,7 @@ document.querySelector(".logout-btn").addEventListener("click", async (e) => {
 
   try {
     console.log("keldi");
-    await fetch("http://localhost:3000/users/logout", {
+    await fetch("https://harmonix.uz/users/logout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -3,7 +3,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   
     const email = document.querySelector("#email").value;
     try {
-      const res = await fetch("http://localhost:3000/users/forgot", {
+      const res = await fetch("https://harmonix.uz/users/forgot", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

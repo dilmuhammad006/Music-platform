@@ -12,7 +12,7 @@ await connectDb()
   });
 
 const server = app.listen(APP_PORT, () => {
-  console.log(`http:localhost:${APP_PORT}`);
+  console.log(`https:localhost:${APP_PORT}`);
 });
 
 process.on("unhandledRejection", (reason, _) => {

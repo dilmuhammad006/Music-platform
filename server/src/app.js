@@ -7,13 +7,10 @@ import cors from "cors";
 import path from "path";
 const app = express();
 
-// if (process.env.NODE_ENV.trim() === "development") {
-//   app.use(morgan("dev"));
-//   console.log(process.env.NODE_ENV);
-//
 app.use(
   cors({
-    origin: "http://localhost:4000",
+    origin: "https://harmonix.uz/",
+	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
@@ -27,7 +24,7 @@ console.log(uploadsPath)
 
 app.use("/", router);
 
-app.all("/*splat", (req, res) => {
+app.all("/splat", (req, res) => {
   res.status(404).send({
     message: "This page not found",
   });
@@ -36,3 +33,4 @@ app.all("/*splat", (req, res) => {
 app.use(errorHandler);
 
 export default app;
+

@@ -5,7 +5,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
   try {
-    const res = await fetch("http://localhost:3000/users/register", {
+    const res = await fetch("https://harmonix/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

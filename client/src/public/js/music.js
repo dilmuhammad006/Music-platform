@@ -13,7 +13,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     formData.append("musicFile", musicFile);
   
     try {
-      const res = await fetch("http://localhost:3000/musics/add", {
+      const res = await fetch("https://harmonix.uz/musics/add", {
         method: "POST",
         credentials: "include",
         body: formData, 

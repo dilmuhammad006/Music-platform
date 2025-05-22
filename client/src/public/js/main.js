@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const musicList = document.getElementById("music-list");
 
   try {
-    const res = await fetch("http://localhost:3000/musicians/all", {
+    const res = await fetch("https://harmonix.uz/musicians/all", {
       method: "GET",
       credentials: "include",
     });
@@ -44,31 +44,69 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (artist.musics.length > 0) {
           musicList.innerHTML = artist.musics
             .map(
-              (music) => `
-                  <div class="music-card card bg-dark text-light border-secondary shadow-sm mb-3">
-                    <div class="card-body">
-                      <div class="d-flex align-items-center mb-2 gap-3">
-                        <img src="https://img.icons8.com/ios-filled/50/music.png" width="40" height="40" />
-                        <div>
-                          <h6 class="card-title mb-0">${music.name}</h6>
-                          <small class="text-secondary">${
-                            music.duration
-                          }</small>
-                        </div>
-                        <small class="ms-auto text-muted">${music.createdAt.substring(
-                          0,
-                          10
-                        )}</small>
+              (music, index) => `
+                <div class="music-card card bg-dark text-light border-secondary shadow-sm mb-3">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-2 gap-3">
+                      <img src="https://img.icons8.com/ios-filled/50/music.png" width="40" height="40" />
+                      <div>
+                        <h6 class="card-title mb-0">${music.name}</h6>
+                        <small class="text-secondary">${music.duration}</small>
                       </div>
-                      <audio controls style="width: 100%;" class="rounded">
-                        <source src="http://localhost:3000${
-                          music.fileUrl
-                        }" type="audio/mp4" />
-                      </audio>
+                      <small class="ms-auto text-muted">${music.createdAt.substring(
+                        0,
+                        10
+                      )}</small>
                     </div>
-                  </div>`
+                    <audio 
+                      controls 
+                      data-artist-id="${artist._id}" 
+                      data-index="${index}" 
+                      style="width: 100%;" class="rounded audio-player">
+                      <source src="https://harmonix.uz${
+                        music.fileUrl
+                      }" type="audio/mp4" />
+                    </audio>
+                  </div>
+                </div>`
             )
             .join("");
+
+          const players = document.querySelectorAll(".audio-player");
+          players.forEach((player) => {
+            player.addEventListener("play", () => {
+              localStorage.setItem(
+                "lastPlayedArtistId",
+                player.dataset.artistId
+              );
+              localStorage.setItem("lastPlayedIndex", player.dataset.index);
+            });
+
+            player.addEventListener("ended", () => {
+              const currentIndex = parseInt(player.dataset.index);
+              const nextPlayer = document.querySelector(
+                `.audio-player[data-index="${currentIndex + 1}"]`
+              );
+              if (nextPlayer) {
+                nextPlayer.play();
+              }
+            });
+          });
+
+          const lastPlayedArtistId = localStorage.getItem("lastPlayedArtistId");
+          const lastPlayedIndex = localStorage.getItem("lastPlayedIndex");
+          if (
+            lastPlayedArtistId === artist._id &&
+            lastPlayedIndex !== null &&
+            document.querySelector(
+              `.audio-player[data-index="${lastPlayedIndex}"]`
+            )
+          ) {
+            const lastPlayer = document.querySelector(
+              `.audio-player[data-index="${lastPlayedIndex}"]`
+            );
+            lastPlayer.play();
+          }
         } else {
           musicList.innerHTML =
             "<p class='text-secondary'>No musics available.</p>";

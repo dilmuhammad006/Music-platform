@@ -4,7 +4,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
   try {
-    const res = await fetch("http://localhost:3000/users/login", {
+    const res = await fetch("/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,6 +20,6 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     }
     window.location.href = "../index.html";
   } catch (error) {
-    document.getElementById("error-message").textContent = error.message;
+    document.getElementById("error-message").textContent = error;
   }
 });
