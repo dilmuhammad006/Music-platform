@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const musicList = document.getElementById("music-list");
 
   try {
-    const res = await fetch("https://harmonix.uz/musicians/all", {
+    const res = await fetch("https://harmonix.uz/api/musicians/all", {
       method: "GET",
       credentials: "include",
     });
