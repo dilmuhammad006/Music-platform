@@ -1,3 +1,5 @@
+import { baseUrl } from "../../../config/base_url";
+
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -5,7 +7,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
   try {
-    const res = await fetch("https://harmonix/users/register", {
+    const res = await fetch(`${baseUrl}/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

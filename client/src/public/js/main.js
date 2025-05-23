@@ -1,21 +1,27 @@
+import { baseUrl, musicBaseUrl } from "../../../config/base_url";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.querySelector(".artist-container");
   const errorMessage = document.getElementById("error-message");
   const musicList = document.getElementById("music-list");
 
   try {
-    const res = await fetch("https://harmonix.uz/api/musicians/all", {
+    const res = await fetch(`${baseUrl}/musicians/all`, {
       method: "GET",
       credentials: "include",
     });
-
 
     const artists = await res.json();
     if (res.status === 403 || res.status === 401) {
       return (window.location.href = "./pages/login.html");
     }
 
-    document.querySelector("header").insertAdjacentHTML("afterbegin", `<p class = "email">${artists.email}</p>`)
+    document
+      .querySelector("header")
+      .insertAdjacentHTML(
+        "afterbegin",
+        `<p class = "email">${artists.email}</p>`
+      );
     if (artists.role == "ADMIN") {
       document.querySelector("header").insertAdjacentHTML(
         "beforeend",
@@ -63,9 +69,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                       data-artist-id="${artist._id}" 
                       data-index="${index}" 
                       style="width: 100%;" class="rounded audio-player">
-                      <source src="https://harmonix.uz${
-                        music.fileUrl
-                      }" type="audio/mp4" />
+                      <source src="${musicBaseUrl}${
+                music.fileUrl
+              }" type="audio/mp4" />
                     </audio>
                   </div>
                 </div>`

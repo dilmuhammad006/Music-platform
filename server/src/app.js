@@ -1,15 +1,15 @@
 import router from "./modules/main.route.js";
 import express from "express";
-import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import errorHandler from "./middlewares/error.handler.middleware.js";
 import cors from "cors";
 import path from "path";
+import dotenvConfig from "./config/dotenv.config.js";
 const app = express();
 
 app.use(
   cors({
-	origin: "https://harmonix.uz/",
+	origin: dotenvConfig.CORS_ORIGIN,
 	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 	credentials: true,
   })

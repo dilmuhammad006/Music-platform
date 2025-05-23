@@ -1,9 +1,11 @@
+import { baseUrl } from "../../../config/base_url";
+
 document.querySelector(".logout-btn").addEventListener("click", async (e) => {
   e.preventDefault();
 
   try {
     console.log("keldi");
-    await fetch("https://harmonix.uz/users/logout", {
+    await fetch(`${baseUrl}/users/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -12,7 +14,7 @@ document.querySelector(".logout-btn").addEventListener("click", async (e) => {
     });
 
     window.location.href = "../pages/login.html";
-    console.log("keldi")
+    console.log("keldi");
   } catch (error) {
     alert(error.message);
   }

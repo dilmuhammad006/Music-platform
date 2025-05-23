@@ -1,3 +1,5 @@
+import { baseUrl } from "../../../config/base_url";
+
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -6,7 +8,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   const params = new URLSearchParams(window.location.search);
   const resetToken = params.get("resetToken");
   try {
-    const res = await fetch("https://harmonix.uz/users/reset", {
+    const res = await fetch(`${baseUrl}/users/reset`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
