@@ -24,5 +24,6 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
             git pull origin main
             npm i
-            pm2 restart harmonix || pm2 start "npm run start:dev" --name test
+            pm2 restart harmonix/server || pm2 start "npm run start:dev" --name server 
+            pm2 restart harmonix/client || pm2 start "npm  start" --name client 
           EOF

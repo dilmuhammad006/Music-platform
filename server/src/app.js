@@ -20,7 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 
 const uploadsPath = path.join(process.cwd(), "..", '/uploads');
 app.use('/uploads', express.static(uploadsPath));
-console.log(uploadsPath)
 
 app.use("/api", router);
 

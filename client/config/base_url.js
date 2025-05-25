@@ -1,2 +1,2 @@
-export const baseUrl = "http://harmonix.uz";
-export const musicBaseUrl = "http://harmonix.uz";
+export const baseUrl = "http://api.harmonix.uz";
+export const musicBaseUrl = "http://api.harmonix.uz";
