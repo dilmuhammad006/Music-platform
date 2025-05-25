@@ -9,7 +9,7 @@ const app = express();
 
 app.use(
   cors({
-	origin: dotenvConfig.CORS_ORIGIN,
+	origin: 'https://harmonix.uz',
 	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 	credentials: true,
   })
