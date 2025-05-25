@@ -9,17 +9,17 @@ const app = express();
 
 app.use(
   cors({
-	origin: 'https://harmonix.uz',
-	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-	credentials: true,
+    origin: ["*"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
   })
 );
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const uploadsPath = path.join(process.cwd(), "..", '/uploads');
-app.use('/uploads', express.static(uploadsPath));
+const uploadsPath = path.join(process.cwd(), "..", "/uploads");
+app.use("/uploads", express.static(uploadsPath));
 
 app.use("/api", router);
 
@@ -32,4 +32,3 @@ app.all("/splat", (req, res) => {
 app.use(errorHandler);
 
 export default app;
-
