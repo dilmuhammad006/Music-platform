@@ -9,7 +9,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["*"],
+    origin: dotenvConfig.CORS_ORIGIN,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
