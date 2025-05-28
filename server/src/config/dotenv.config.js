@@ -9,5 +9,5 @@ export default {
   REFRESH_TOKEN_SECRET_KEY: process.env.REFRESH_TOKEN_SECRET_KEY,
   ACCES_TOKEN_SECRET_EXP_IN: process.env.ACCES_TOKEN_SECRET_EXP_IN,
   REFRESH_TOKEN_SECRET_EXP_IN: process.env.REFRESH_TOKEN_SECRET_EXP_IN,
-  CORS_ORIGIN: process.env.CORS_ORIGIN,
+  CORS_ORIGIN: process.env.CORS_ORIGIN || "https://harmonix.uz",
 };
