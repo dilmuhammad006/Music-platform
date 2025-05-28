@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                       data-artist-id="${artist._id}" 
                       data-index="${index}" 
                       style="width: 100%;" class="rounded audio-player">
-                      <source src="${musicBaseUrl}${
+                      <source src="${baseUrl}${
                 music.fileUrl
               }" type="audio/mp4" />
                     </audio>
