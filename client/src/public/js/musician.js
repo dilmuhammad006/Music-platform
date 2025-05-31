@@ -6,15 +6,17 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   const name = document.querySelector("#name").value;
   const nickname = document.querySelector("#nickname").value;
 
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("nickname", nickname);
-
   try {
     const res = await fetch(`${baseUrl}/musicians/add`, {
       method: "POST",
       credentials: "include",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        nickname,
+      }),
     });
 
     const data = await res.json();
@@ -24,7 +26,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     }
 
     window.location.href = "../index.html";
-  } catch (error) {
-    document.getElementById("error-message").textContent = error.message;
+  } catch (err) {
+    document.getElementById("error-message").textContent = err.message;
   }
 });
