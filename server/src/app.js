@@ -13,7 +13,7 @@ app.use(
     credentials: true,
   })
 );
-app.options("*", cors());
+app.options("/api/musics/add", cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
