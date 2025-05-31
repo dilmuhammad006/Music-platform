@@ -27,7 +27,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         "beforeend",
         `<button class="add-music">
             <a href="./pages/music.html" class="text-white text-decoration-none d-block">Add music</a>
-        </button>`
+        </button>
+        <br><br>
+        <button class="add-music">
+            <a href="./pages/musician.html" class="text-white text-decoration-none d-block">Add musicician</a>
+        </button>
+        `
       );
     }
 

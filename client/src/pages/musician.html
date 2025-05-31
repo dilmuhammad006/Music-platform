@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add a new  musician</title>
+    <link rel="stylesheet" href="../public/css/auth.css">
+</head>
+
+<body>
+    <div class="form-container">
+        <div class="text-center">
+            <img src="../public/images/harmonix.png" alt="harmonix picture" />
+        </div>
+        <h2 class="text-center mb-4">Add  a new musician</h2>
+
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Enter musician name</label>
+                <input type="text" id="name" class="form-control" name="name" required />
+            </div>
+            <div class="mb-3">
+                <label for="nickname" class="form-label">Enter musician nickname</label>
+                <input type="text" id="nickname" class="form-control" name="nickname" required />
+            </div>
+            <button type="submit" class="btn btn-register w-100">Add musician</button>
+            <p id="error-message" class="text-success mt-2"></p>
+
+        </form>
+    </div>
+
+    <script type="module" src="../public/js/musician.js"></script>
+    <script type="module" src="../main.js"></script>
+</body>
+
+</html>
