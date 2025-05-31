@@ -3,16 +3,20 @@ import { baseUrl } from "../../../config/base_url";
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const email = document.querySelector("#email").value;
-  const password = document.querySelector("#password").value;
+  const name = document.querySelector("#name").value;
+  const nickname = document.querySelector("#nickname").value;
+
   try {
-    const res = await fetch(`${baseUrl}/users/login`, {
+    const res = await fetch(`${baseUrl}/musicians/add`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({
+        name,
+        nickname,
+      }),
     });
 
     const data = await res.json();
@@ -20,8 +24,9 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     if (!res.ok) {
       throw new Error(data.message);
     }
+
     window.location.href = "../index.html";
   } catch (error) {
-    document.getElementById("error-message").textContent = error;
+    document.getElementById("error-message").textContent = error.message;
   }
 });
