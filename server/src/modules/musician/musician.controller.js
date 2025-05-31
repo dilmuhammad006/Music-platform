@@ -20,6 +20,7 @@ class MusicianController {
   addMusicians = async (req, res, next) => {
     try {
       const { name, nickname } = req.body;
+      console.log(req.body)
 
       const data = await this.#_musicianService.addMusicians(name, nickname);
       res.status(data.status).send(data);
