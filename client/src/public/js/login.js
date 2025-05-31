@@ -26,7 +26,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     }
 
     window.location.href = "../index.html";
-  } catch (error) {
-    document.getElementById("error-message").textContent = error.message;
+  } catch (err) {
+    document.getElementById("error-message").textContent = err.message;
   }
 });
