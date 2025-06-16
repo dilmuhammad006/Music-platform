@@ -10,9 +10,9 @@ musicsRouter
   .get("/all", Protected(true), musicsController.getAllMusics)
   .post(
     "/add",
-    // authMiddleware,
-    // checkRole(["ADMIN"]),
-    // Protected(true),
+    authMiddleware,
+    checkRole(["ADMIN"]),
+    Protected(true),
     uploadMusic.single("musicFile"),
     musicsController.addMusics
   )
